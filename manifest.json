@@ -1,0 +1,6 @@
+{
+    "name": "Забираем инфу компаний из rusprofile.ru",
+    "description": "Забираем инфу компаний из rusprofile.ru",
+    "version": "1.0",
+    "manifest_version": 3
+}
