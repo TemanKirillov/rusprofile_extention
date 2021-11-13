@@ -2,5 +2,22 @@
     "name": "Забираем инфу компаний из rusprofile.ru",
     "description": "Забираем инфу компаний из rusprofile.ru",
     "version": "1.0",
-    "manifest_version": 3
+    "manifest_version": 3,
+
+    "action": {
+        "default_icon": {
+            "16": "/images/icons/icon-16.png",
+            "32": "/images/icons/icon-32.png",
+            "48": "/images/icons/icon-48.png",
+            "128": "/images/icons/icon-128.png",
+            "180": "/images/icons/icon-180.png"
+        }
+    },
+    "icons": {
+        "16": "/images/icons/icon-16.png",
+        "32": "/images/icons/icon-32.png",
+        "48": "/images/icons/icon-48.png",
+        "128": "/images/icons/icon-128.png",
+        "180": "/images/icons/icon-180.png"
+    }
 }
