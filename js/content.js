@@ -57,7 +57,11 @@ function getCompanyAddress() {
 function getCompanyCity() {
     var result = $("span[itemprop='addressLocality']").text().trim();
     if (result === '') {
-        result = $("meta[itemprop='addressLocality']")[0].getAttribute("content");
+        result = $("meta[itemprop='addressLocality']")[0]
+        if (result === undefined) {
+            return '';
+        }
+        return result.getAttribute("content");
     }
 
     return result;
@@ -177,7 +181,14 @@ function getTableHeaderAsString() {
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.message === "getData") {
-            copyToClipboard(getCompanyDataAsString());
+
+            try {
+                copyToClipboard(getCompanyDataAsString());
+            } catch (e) {
+                copyToClipboard(" ");
+                console.error(e);
+            }
+
         }
     }
 );
