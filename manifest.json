@@ -1,7 +1,7 @@
 {
-    "name": "Забираем инфу компаний из rusprofile.ru",
-    "description": "Забираем инфу компаний из rusprofile.ru",
-    "version": "1.0",
+    "name": "RUSPROFILE.RU: Сбор данных",
+    "description": "Быстрый способ собрать информацию компаний и ИП с rusprofile.ru",
+    "version": "1.1",
     "manifest_version": 3,
     "permissions": ["activeTab", "scripting"],
 
