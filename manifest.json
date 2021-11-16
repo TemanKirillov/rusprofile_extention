@@ -10,7 +10,8 @@
             "matches": ["https://www.rusprofile.ru/*"],
             "js": [
                 "js/imported/jquery-3.6.0.min.js",
-                "js/content.js"
+                "js/content.js",
+                "js/contentIP.js"
             ]
         }
     ],

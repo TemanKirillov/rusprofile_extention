@@ -11,6 +11,19 @@ function copyToClipboard(string) {
 }
 
 /**
+ * Извлекает тип страницы из URL
+ *
+ * @returns {string} id (компании), ip (ИП)
+ */
+function getTypePageFromURL() {
+    var typePage = document.URL.split("/")[3];
+    if (typePage === undefined) {
+        return "";
+    }
+    return typePage;
+}
+
+/**
  * ИНН
  */
 function getInn() {
@@ -21,7 +34,10 @@ function getInn() {
  * Наименование организации
  */
 function getCompanyName() {
-    return $("#anketa > div.anketa-top > div > div.company-name").text();
+    return $(".company-name")
+        .text()
+        .replace(/\s+/g, ' ')
+        .trim();
 }
 
 /**
@@ -107,10 +123,10 @@ function getCompanyPopulation() {
  * Инфо о банкротстве
  */
 function getBankruptcy() {
-    var result = $("#anketa .company-bankruptcy-row > div.text-red").text();
+    var result = $(".company-bankruptcy-row > div.text-red").text();
 
     if (result === '') {
-        result = $("#anketa .company-bankruptcy-row").text();
+        result = $(".company-bankruptcy-row").text();
     }
     return result
         .replace(/\s+/g, ' ')
@@ -158,10 +174,11 @@ function getCompanyDataAsString() {
     var bankruptcy = getBankruptcy();
     var revenue = getRevenue();
     var profit = getProfit();
+    var url = document.URL;
 
     var result = `${inn}\t${companyName}\t${companyStatus}\t${mainJob}` +
                  `\t${companyAddress}\t${city}\t${managerType}\t${manager}` +
-                 `\t${population}\t${bankruptcy}\t${revenue}\t${profit}`;
+                 `\t${population}\t${bankruptcy}\t${revenue}\t${profit}\t${url}`;
 
     return result;
 }
@@ -183,7 +200,16 @@ chrome.runtime.onMessage.addListener(
         if (request.message === "getData") {
 
             try {
-                copyToClipboard(getCompanyDataAsString());
+                if (getTypePageFromURL() === 'id') {
+                    copyToClipboard(getCompanyDataAsString());
+                }
+                else if (getTypePageFromURL() === 'ip') {
+                    copyToClipboard(getIPDataAsString());
+                }
+                else {
+                    copyToClipboard("НЕИЗВЕСТНЫЙ ТИП СТРАНИЦЫ!");
+                }
+
             } catch (e) {
                 copyToClipboard(" ");
                 console.error(e);
