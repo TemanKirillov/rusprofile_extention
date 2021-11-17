@@ -37,10 +37,18 @@ function getCompanyMainJobIP() {
  * Город регистрации ИП
  */
 function getCompanyCityIP() {
-    return $("div.company-requisites dt.company-info__title:contains('Регион') ~ dd")
+    var result = $("div.company-requisites dt.company-info__title:contains('Регион') ~ dd")
         .text()
         .replace(/\s+/g, ' ')
         .trim();
+    if (result === '') {
+        result = $("div.company-requisites dt.company-info__title:contains('Адрес') ~ dd")
+            .text()
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    return result;
 }
 
 /**
